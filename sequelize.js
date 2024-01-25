@@ -3,8 +3,6 @@ const sequelize = new Sequelize('rupesh', 'root', 'Rup@1234', {
     host: 'localhost',
     dialect: 'mysql'
   });
-
-
   async  function  test(){
     try {
         await sequelize.authenticate();
