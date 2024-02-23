@@ -15,7 +15,6 @@ const sequelize = new Sequelize('testDB', 'root', 'Rup@1234', {
             }
 
          }
-
          connect()
 
   // async  function  test(){

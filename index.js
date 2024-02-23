@@ -5,9 +5,8 @@
 // // app.use(express.urlencoded({ extended: true })) 
 // // const bodyParser = require('body-parser');
 // // app.use(bodyParser.urlencoded({ extended: true }));
-// // app.use(express.json());
-// // const cors = require('cors'); 
-// // app.use(cors());
+
+
 // // // db connections
 // //   //  find all 
 // //   app.get('/',(req,res)=>{
@@ -159,15 +158,85 @@
    
       let express=     require('express')
           let User=    require('./model')
-     let app=      express()
+          let app=      express()
+          const cors = require('cors'); 
+app.use(cors());
+        
+
+     app.use(express.json());
 
      app.get('/',     async (req,res)=>{
       // res.send('homee fileee')
              await  User.sync()
-             res.send('doneee')
+             let newData=      await User.findAll()
+             res.send(newData)
 
 
      })
+
+
+
+     app.post('/create'  ,  async(req,res)=> {
+         let{  firstName, lastName,email}    = req.body
+              await User.sync()
+            let user=    await   User.create({
+                firstName:firstName,
+                lastName:lastName,
+                email:email
+
+              })
+
+              res.send(user,"doneeeee data created ")
+
+      // console.log(req.body);
+
+  
+     })
+
+
+
+     app.patch('/edit/:id',  async(req,res)=>{
+
+        let {id}=   req.params
+        let {firstName,lastName,email}= req.body
+            let  data=  await  User.findByPk(id)
+
+
+            data.firstName=firstName,
+            data.lastName=lastName
+            data.email=email
+
+             await data.save()
+
+             res.send(data)
+
+
+            // console.log(data,'dddd');
+
+
+
+
+
+     })
+
+
+
+     app.delete('/delete/:id',  async ( req,res)=>{
+
+      let {id}=req.params
+               let data=  await  User.findByPk(id)
+               if(!data){
+                res.send('data hi nhi haiiii')
+               }
+               else{
+                      await  data.destroy()
+                     res.send('deletedddd')
+               }
+
+
+
+     })
+
 
      let port=4000
      app.listen( port ,()=>{
