@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Data</h1>
+    <table id="userData">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+    </table>
+    <script>
+        async function fetchUserData() {
+            const response = await fetch('http://localhost:4000/');
+            const data = await response.json();
+            return data;
+        }
+
+        async function displayUserData() {
+            const userData = await fetchUserData();
+            const tableBody = document.getElementById('userData');
+            userData.forEach(user => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = user.firstName;
+                row.insertCell().textContent = user.lastName;
+                row.insertCell().textContent = user.email;
+            });
+        }
+
+        displayUserData();
+    </script>
+</body>
+</html>
+
+  

@@ -1,0 +1,32 @@
+/* *{
+    background-color: red;
+} */
+
+
+div{
+    /* background-color: red; */
+    height: 150px;
+    width: 150px;
+    transition: 3s;
+    display: inline-block;
+}
+
+
+
+div:nth-of-type(1){
+    background-color: blueviolet;
+}
+div:nth-of-type(2){
+    background-color: red;
+    /* position: static; */
+    /* position: relative; */
+    /* position: sticky; */
+    /* top:5px; */
+}
+div:nth-of-type(3){
+    background-color: rgb(43, 202, 226);
+}
+div:hover{
+    border-radius: 50%;
+    background-color: blue;
+}
